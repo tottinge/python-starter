@@ -37,6 +37,7 @@
 - **Conventional commits**: Use conventional commit format
   - Examples: `feat: add user validation`, `test: add edge case for parser`
 - **Concise messages**: Keep to one line when possible
+- **LLM policy**: The LLM will never issue commit statements - commits are always made by the human developer
 
 ### When to Reset
 
