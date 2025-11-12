@@ -1,0 +1,13 @@
+#!/bin/bash
+set -e
+
+echo "Running pyupgrade..."
+find . -name "*.py" -not -path "./.venv/*" -not -path "./.git/*" -exec pyupgrade --py313-plus {} +
+
+echo "Running ruff fix..."
+ruff check --fix .
+
+echo "Running black..."
+black .
+
+echo "Fixup complete!"

@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+black --check .
+find . -name "*.py" -not -path "./.venv/*" -not -path "./.git/*" -exec pyupgrade --py313-plus {} +
+ruff -q check .
+pytest 
+git clean --dry-run
+

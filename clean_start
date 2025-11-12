@@ -1,0 +1,23 @@
+#!/bin/bash
+set -e
+
+# Check if remote origin exists
+if git remote | grep -q origin; then
+    git pull --rebase
+else
+    if [ -n "$(git ls-files --others --modified --exclude-standard)" ]; 
+    then
+	git status
+	exit 1
+    fi
+    echo "No remote origin configured, skipping git pull"
+fi
+
+uv sync
+
+if [ "scripts/pre-commit" -nt ".git/hooks/pre-commit" ]; then
+	echo "updating precommit hook"
+	cp scripts/pre-commit .git/hooks/
+fi
+./check
+
